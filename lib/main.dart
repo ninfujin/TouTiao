@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:toutiao_demo/pages/tabbar/home.dart';
 import 'package:toutiao_demo/pages/tabbar/moive.dart';
+import 'package:toutiao_demo/pages/tabbar/video.dart';
 void main() {
   runApp(const MyApp());
   if (Platform.isAndroid) {
@@ -37,8 +38,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int currentIndex = 1;
-  List pages = [const Home(), Moive()];
+  int currentIndex = 2;
+  List pages = [const Home(),const Moive(),const Video()];
   @override
 
   List<BottomNavigationBarItem> items(int i) {

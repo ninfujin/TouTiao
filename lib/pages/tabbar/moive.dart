@@ -37,7 +37,7 @@ class _Moive extends State<Moive> {
     Dio dio = new Dio();
     dio.options.headers["referer"] = "https://www.ixigua.com/";
     Response res = await dio.get(
-        "https://www.ixigua.com/api/feedv2/feedById?_signature=_02B4Z6wo00f01DSZuYwAAIDAtJtDz8jbLOQ0vb0AAGzhed&channelId=94349543909&count=9&maxTime=1643960038&request_from=701&queryCount=2&referrer=");
+        "https://www.ixigua.com/api/feedv2/feedById?_signature=_02B4Z6wo00f01E7hKwgAAIDAzuPRSITmcWhOxS-AAHJMa1&channelId=94349543909&count=90&maxTime=1643960038&request_from=701&queryCount=2&referrer=");
     setState(() {
       mlist = res.data['data']['channelFeed']['Data'];
     });
@@ -45,7 +45,7 @@ class _Moive extends State<Moive> {
   }
 
   Future<void> _onRefresh() async {
-    // getData();
+    getData();
   }
 
   @override
@@ -103,7 +103,8 @@ class _Moive extends State<Moive> {
             ),
           ),
         ),
-        Container(
+        RefreshIndicator(
+          child: Container(
               margin: const EdgeInsets.only(top: 80),
               child: ListView.builder(
                   itemBuilder: (BuildContext context, int i) {
@@ -292,6 +293,8 @@ class _Moive extends State<Moive> {
                     }).toList());
                   },
                   physics: const PageScrollPhysics())),
+          onRefresh: _onRefresh,
+        )
       ],
     );
   }
