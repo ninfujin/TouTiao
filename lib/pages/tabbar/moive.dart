@@ -35,11 +35,11 @@ class _Moive extends State<Moive> {
 
   void getData() async {
     Dio dio = new Dio();
-    dio.options.headers["referer"] = "https://www.ixigua.com/";
-    Response res = await dio.get(
-        "https://www.ixigua.com/api/feedv2/feedById?_signature=_02B4Z6wo00f01E7hKwgAAIDAzuPRSITmcWhOxS-AAHJMa1&channelId=94349543909&count=90&maxTime=1643960038&request_from=701&queryCount=2&referrer=");
+    // dio.options.headers["referer"] = "https://www.ixigua.com/";
+    Response res = await dio.get("https://m.ixigua.com/api/feedv2/feedById?aid=3586&timestamp=1643977688861_230378.12833986426&device_id=&channelName=default&channelId=94349555027&count=30&refresh_type=open&request_from=710&queryCount=1");
+   print(res.data['data']['channel_feed']['data']);
     setState(() {
-      mlist = res.data['data']['channelFeed']['Data'];
+      mlist = res.data['data']['channel_feed']['data'];
     });
 
   }
@@ -149,7 +149,7 @@ class _Moive extends State<Moive> {
                                                       color: Color.fromRGBO(
                                                           34, 34, 34, 1)),
                                                 )),
-                                            v['data']['user_info']['user_verified'] == true ? Container(
+                                            v['data']['user_info']['user_is_verified'] == true ? Container(
                                                 margin:
                                                 const EdgeInsets.only(top: 3.0),
                                                 child: const Icon(
@@ -196,7 +196,7 @@ class _Moive extends State<Moive> {
                               width: double.infinity,
                               height: 180.0,
                               child: Image.network(
-                                  v['data']['image_url'],
+                                  v['data']['cover_image_url'],
                                   width: double.infinity,
                                   height: double.infinity,
                                   fit: BoxFit.fill),
@@ -263,7 +263,7 @@ class _Moive extends State<Moive> {
                                                 size: 16.0,
                                               ),
                                             ),
-                                            Text(v['data']['commentNum'].toString(),
+                                            Text(v['data']['comment_count'].toString(),
                                                 style: TextStyle(fontSize: 12.0))
                                           ],
                                         )),
