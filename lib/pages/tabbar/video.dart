@@ -104,6 +104,7 @@ class _Video extends State<Video> {
                   itemBuilder: (BuildContext context, int i) {
                     return Column(
                         children: vlist.map<Widget>((v) {
+                          // print(v['tagList']);
                       return Container(
                           width: 340.0,
                           margin:
@@ -144,7 +145,7 @@ class _Video extends State<Video> {
                                               Container(
                                                   margin: const EdgeInsets.only(
                                                       left: 8.0, top: 2.0),
-                                                  child: Row(children: v.tagList.map<Widget>((e) {
+                                                  child: Row(children: v['tagList'].map<Widget>((e) {
                                                     return Container(
                                                       decoration:
                                                           const BoxDecoration(
@@ -165,7 +166,7 @@ class _Video extends State<Video> {
                                                               right: 2.0,
                                                               bottom: 1.0),
                                                       child: Text(
-                                                        'e',
+                                                        e,
                                                         style: const TextStyle(
                                                             fontSize: 9.0,
                                                             color:
