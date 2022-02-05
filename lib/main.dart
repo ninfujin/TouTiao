@@ -39,7 +39,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentIndex = 2;
-  List pages = [const Home(),const Moive(),const Video()];
+  List pages = [const Home(),const Video(),const Moive(),];
   @override
 
   List<BottomNavigationBarItem> items(int i) {

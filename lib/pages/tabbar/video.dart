@@ -10,19 +10,6 @@ class Video extends StatefulWidget {
 }
 
 class _Video extends State<Video> {
-  List vlists = [
-    {
-      "title": "",
-      "tagList": [],
-      "duration": 641,
-      "coverList": [
-        {},
-        {'url': ''}
-      ],
-      'subTitle': '',
-    }
-  ];
-
   void initState() {
     super.initState();
     getData();
@@ -32,7 +19,7 @@ class _Video extends State<Video> {
     Dio dio = new Dio();
     dio.options.headers["referer"] = "https://www.ixigua.com/channel/dianying";
     Response res = await dio.get(
-      "https://www.ixigua.com/api/cinema/feed/feedById?_signature=_02B4Z6wo00f01hDCqywAAIDCkMBRbkJwssIQ5q-AAOXc59&channelId=94349541312&offset=0&limit=8&request_from=702&queryCount=1");
+      "https://www.ixigua.com/api/cinema/feed/feedById?_signature=_02B4Z6wo00f01hDCqywAAIDCkMBRbkJwssIQ5q-AAOXc59&channelId=94349541312&offset=0&limit=80&request_from=702&queryCount=1");
     // setState(() {
     //   vlist = res.data['data']['channelFeed']['Data'];
     // });
@@ -269,27 +256,28 @@ class _Video extends State<Video> {
                   ),
                 ),
               ),
-              FutureBuilder(
-                future: getData(),
-                builder: (BuildContext context, AsyncSnapshot<Response> snapshot){
-                  if(snapshot.hasData){
-                      List vlist = snapshot.data!.data['data']['channelFeed']['Data'];
-                      return  RefreshIndicator(
-                        child: Container(
-                            margin: const EdgeInsets.only(top: 80),
-                            child: ListView.builder(
-                                itemBuilder: (BuildContext context, int i) {
-                                  return Column(
-                                      children: elemGrid(vlist));
-                                },
-                                physics: const PageScrollPhysics())),
-                        onRefresh: _onRefresh,
-                      );
-                  }else{
-                      return const Center(child:Text("加载中...",style: TextStyle(fontSize:12.0,color: Color.fromRGBO(129, 129, 129, 1)),));
-                  }
-                }
+              RefreshIndicator(
+                child:FutureBuilder(
+                    future: getData(),
+                    builder: (BuildContext context, AsyncSnapshot<Response> snapshot){
+                      if(snapshot.hasData){
+                        List vlist = snapshot.data!.data['data']['channelFeed']['Data'];
+                        return Container(
+                              margin: const EdgeInsets.only(top: 80),
+                              child: ListView.builder(
+                                  itemBuilder: (BuildContext context, int i) {
+                                    return Column(
+                                        children: elemGrid(vlist));
+                                  },
+                                  physics: const PageScrollPhysics()));
+                      }else{
+                        return const Center(child:Text("加载中...",style: TextStyle(fontSize:12.0,color: Color.fromRGBO(129, 129, 129, 1)),));
+                      }
+                    }
+                ),
+                onRefresh: _onRefresh,
               )
+
             ],
           );
 
