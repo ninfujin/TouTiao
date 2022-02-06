@@ -172,6 +172,7 @@ class _Video extends State<Video> {
                                   Container(
                                     width: double.infinity,
                                     height: 180.0,
+                                    color: const Color.fromRGBO(214, 214, 214, 1),
                                     child: Image.network(
                                         v['data']['image_url'],
                                         width: double.infinity,

@@ -4,12 +4,15 @@ import 'package:flutter/services.dart';
 import 'package:toutiao_demo/pages/tabbar/home.dart';
 import 'package:toutiao_demo/pages/tabbar/moive.dart';
 import 'package:toutiao_demo/pages/tabbar/video.dart';
+import 'package:toutiao_demo/pages/tabbar/my.dart';
+
 void main() {
   runApp(const MyApp());
   if (Platform.isAndroid) {
-    // 以下两行 设置android状态栏为透明的沉浸。写在组件渲染之后，是为了在渲染后进行set赋值，覆盖状态栏，写在渲染之前MaterialApp组件会覆盖掉这个值。
-    SystemUiOverlayStyle systemUiOverlayStyle =
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    // 改变沉浸式导航颜色
+    SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark );
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
 }
@@ -36,12 +39,17 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-
 class _MyHomePageState extends State<MyHomePage> {
-  int currentIndex = 2;
-  List pages = [const Home(),const Video(),const Moive(),];
-  @override
+  int currentIndex = 3;
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  List pages = [const Home(), const Video(), const Moive(), const My()];
+
+  @override
   List<BottomNavigationBarItem> items(int i) {
     return [
       BottomNavigationBarItem(
@@ -62,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
           label: '我的'),
     ];
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
           items: items(currentIndex),
           currentIndex: currentIndex,
           onTap: (int index) {
-            currentIndex = index;
+            currentIndex =  index;
             setState(() {});
           },
         ));
