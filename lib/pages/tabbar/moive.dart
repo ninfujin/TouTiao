@@ -18,10 +18,7 @@ class _Moive extends State<Moive> {
   Future<Response> getData() async {
     Dio dio = new Dio();
     Response res = await dio.get(
-      "https://www.dillonl.com/toutiao/moive");
-    // setState(() {
-    //   mlist = res.data['data']['channelFeed']['Data'];
-    // });
+      "https://www.dillonl.com/toutiao/movie");
     return res;
   }
 
@@ -259,8 +256,6 @@ class _Moive extends State<Moive> {
                     future: getData(),
                     builder: (BuildContext context, AsyncSnapshot<Response> snapshot){
                       if(snapshot.hasData){
-                        print(json.decode(snapshot.data!.data)['Data']);
-                        print('*-*-*-*-*-*-*-*-*-*-*-*-');
                         List mlist = json.decode(snapshot.data!.data)['Data'];
                         return Container(
                               margin: const EdgeInsets.only(top: 80),
