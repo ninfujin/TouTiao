@@ -40,7 +40,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 class _MyHomePageState extends State<MyHomePage> {
-  int currentIndex = 3;
+  int currentIndex = 0;
 
   @override
   void initState() {
